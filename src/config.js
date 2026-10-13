@@ -4,7 +4,9 @@ import 'dotenv/config';
 const database = process.env.DB_NAME || 'nagrik_disha';
 
 if (!/^[a-zA-Z0-9_]+$/.test(database)) {
-  throw new Error('DB_NAME must contain only letters, digits or underscores.');
+  throw new Error(
+    'DB_NAME must contain only letters, digits or underscores.'
+  );
 }
 
 export const config = {
@@ -33,8 +35,11 @@ export const config = {
     dateStrings: true,
 
     ssl: process.env.DB_SSL === 'true'
-      ? { minVersion: 'TLSv1.2' }
+      ? {
+          ca: process.env.DB_SSL_CA,
+          rejectUnauthorized: true,
+          minVersion: 'TLSv1.2',
+        }
       : undefined,
   },
 };
-
