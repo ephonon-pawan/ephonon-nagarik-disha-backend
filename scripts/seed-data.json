@@ -1,0 +1,352 @@
+{
+  "groups": [
+    {
+      "id": "children",
+      "name": "Children (0–12)",
+      "description": "Health, education & protection",
+      "icon": "graduation"
+    },
+    {
+      "id": "youth",
+      "name": "Boys & Youth",
+      "description": "Education, sports & skilling",
+      "icon": "user"
+    },
+    {
+      "id": "women",
+      "name": "Girls & Women",
+      "description": "Safety, scholarships & schemes",
+      "icon": "user"
+    },
+    {
+      "id": "workers",
+      "name": "Adults & Workers",
+      "description": "Jobs, banking & insurance",
+      "icon": "briefcase"
+    },
+    {
+      "id": "seniors",
+      "name": "Senior Citizens",
+      "description": "Pension, health & care schemes",
+      "icon": "glasses"
+    },
+    {
+      "id": "disabilities",
+      "name": "Persons with Disabilities",
+      "description": "Aids, pensions & rights",
+      "icon": "accessibility"
+    },
+    {
+      "id": "farmers",
+      "name": "Farmers",
+      "description": "Subsidies, credit & insurance",
+      "icon": "layers"
+    },
+    {
+      "id": "everyone",
+      "name": "Everyone",
+      "description": "RTI, legal aid & helplines",
+      "icon": "clock"
+    }
+  ],
+  "sectors": [
+    {
+      "id": "education",
+      "name": "Education",
+      "description": "School boards, admissions, e-learning portals and student rights.",
+      "count": "18 LINKS",
+      "icon": "book",
+      "color": "#286594",
+      "action": "Explore Education",
+      "groups": [
+        "children",
+        "youth",
+        "women",
+        "disabilities"
+      ],
+      "keywords": "school student learning"
+    },
+    {
+      "id": "careers",
+      "name": "Career & Jobs",
+      "description": "Government job portals, apprenticeships and employment exchanges.",
+      "count": "14 LINKS",
+      "icon": "briefcase",
+      "color": "#f3a300",
+      "action": "Explore Careers",
+      "groups": [
+        "youth",
+        "women",
+        "workers",
+        "disabilities"
+      ],
+      "keywords": "employment skilling sports"
+    },
+    {
+      "id": "scholarships",
+      "name": "Scholarships",
+      "description": "National, state and community scholarships, ranked by eligibility.",
+      "count": "11 LINKS",
+      "icon": "graduation",
+      "color": "#cb8100",
+      "action": "Explore Scholarships",
+      "groups": [
+        "children",
+        "youth",
+        "women",
+        "disabilities"
+      ],
+      "keywords": "scholarship for girl child student"
+    },
+    {
+      "id": "health",
+      "name": "Health",
+      "description": "Public hospitals, insurance schemes, vaccination and helplines.",
+      "count": "16 LINKS",
+      "icon": "heart",
+      "color": "#317856",
+      "action": "Explore Health",
+      "groups": [
+        "children",
+        "youth",
+        "women",
+        "workers",
+        "seniors",
+        "disabilities",
+        "farmers"
+      ],
+      "keywords": "medical care hospital"
+    },
+    {
+      "id": "finance",
+      "name": "Finance & Banking",
+      "description": "Zero-balance accounts, direct benefit transfer and credit schemes.",
+      "count": "13 LINKS",
+      "icon": "bank",
+      "color": "#286594",
+      "action": "Explore Finance",
+      "groups": [
+        "workers",
+        "women",
+        "seniors",
+        "farmers",
+        "disabilities"
+      ],
+      "keywords": "loan money bank pension"
+    },
+    {
+      "id": "insurance",
+      "name": "Insurance Schemes",
+      "description": "Life, accident and crop insurance run by the government.",
+      "count": "9 LINKS",
+      "icon": "shield",
+      "color": "#725096",
+      "action": "Explore Insurance",
+      "groups": [
+        "workers",
+        "seniors",
+        "farmers",
+        "disabilities"
+      ],
+      "keywords": "protection coverage"
+    },
+    {
+      "id": "agriculture",
+      "name": "Agriculture",
+      "description": "Crop subsidies, MSP information, soil health cards and credit.",
+      "count": "12 LINKS",
+      "icon": "pin",
+      "color": "#317856",
+      "action": "Explore Agriculture",
+      "groups": [
+        "farmers"
+      ],
+      "keywords": "farming farmer kisan subsidy"
+    },
+    {
+      "id": "rti",
+      "name": "RTI (Right to Information)",
+      "description": "How to file an RTI application, formats, fees and appeal process.",
+      "count": "6 LINKS",
+      "icon": "search",
+      "color": "#873333",
+      "action": "Explore RTI",
+      "groups": [
+        "everyone"
+      ],
+      "keywords": "rti application rights information"
+    },
+    {
+      "id": "legal",
+      "name": "Legal Advice & Aid",
+      "description": "Free legal aid societies, Lok Adalat and consumer courts.",
+      "count": "10 LINKS",
+      "icon": "shieldCheck",
+      "color": "#873333",
+      "action": "Explore Legal Aid",
+      "groups": [
+        "everyone",
+        "women",
+        "workers",
+        "seniors",
+        "disabilities"
+      ],
+      "keywords": "law lawyer court rights"
+    },
+    {
+      "id": "police",
+      "name": "Police Protection & Laws",
+      "description": "FIR filing, women’s safety cells, cybercrime reporting portals.",
+      "count": "8 LINKS",
+      "icon": "shield",
+      "color": "#17233f",
+      "action": "Explore Safety",
+      "groups": [
+        "everyone",
+        "children",
+        "women"
+      ],
+      "keywords": "safety crime protection"
+    },
+    {
+      "id": "schemes",
+      "name": "Other Government Schemes",
+      "description": "Housing, LPG, pension and welfare schemes not covered above.",
+      "count": "15 LINKS",
+      "icon": "house",
+      "color": "#cb8100",
+      "action": "Explore Schemes",
+      "groups": [
+        "everyone",
+        "workers",
+        "seniors",
+        "farmers",
+        "women",
+        "disabilities"
+      ],
+      "keywords": "housing lpg pension welfare subsidies"
+    },
+    {
+      "id": "helplines",
+      "name": "Departments & Helplines",
+      "description": "Direct phone numbers for every major department, ministry and emergency line.",
+      "count": "20+ NUMBERS",
+      "icon": "phone",
+      "color": "#617180",
+      "action": "View Helplines",
+      "groups": [
+        "everyone",
+        "children",
+        "youth",
+        "women",
+        "workers",
+        "seniors",
+        "farmers",
+        "disabilities"
+      ],
+      "keywords": "emergency help contact number"
+    }
+  ],
+  "helplineSections": [
+    {
+      "title": "Emergency",
+      "items": [
+        {
+          "name": "All-in-one Emergency",
+          "description": "Police, fire & ambulance dispatch from a single number.",
+          "number": "112"
+        },
+        {
+          "name": "Police",
+          "description": "Direct police control room.",
+          "number": "100"
+        },
+        {
+          "name": "Fire Services",
+          "description": "Fire brigade dispatch.",
+          "number": "101"
+        },
+        {
+          "name": "Ambulance",
+          "description": "Free emergency medical transport.",
+          "number": "108"
+        },
+        {
+          "name": "Disaster Management",
+          "description": "Floods, cyclones & other disaster response.",
+          "number": "1070"
+        },
+        {
+          "name": "Cyber Crime Reporting",
+          "description": "Report online fraud, hacking & harassment.",
+          "number": "1930"
+        }
+      ]
+    },
+    {
+      "title": "Women, Children & Senior Citizens",
+      "items": [
+        {
+          "name": "Women’s Helpline",
+          "description": "Support & rescue for women in distress.",
+          "number": "181"
+        },
+        {
+          "name": "Child Helpline",
+          "description": "Rescue and support for children in danger.",
+          "number": "1098"
+        },
+        {
+          "name": "Senior Citizen Helpline",
+          "description": "Assistance, information & grievance support for the elderly.",
+          "number": "14567"
+        },
+        {
+          "name": "Anti-Human Trafficking",
+          "description": "Report suspected trafficking cases.",
+          "number": "1098"
+        }
+      ]
+    },
+    {
+      "title": "Health",
+      "items": [
+        {
+          "name": "National Health Helpline",
+          "description": "Medical advice & health scheme information.",
+          "number": "104"
+        },
+        {
+          "name": "Mental Health Support (Tele-MANAS)",
+          "description": "Free, confidential mental health counselling.",
+          "number": "14416"
+        }
+      ]
+    },
+    {
+      "title": "Farmers, Consumers & Labour",
+      "items": [
+        {
+          "name": "Kisan (Farmer) Call Centre",
+          "description": "Farming advice, subsidy & scheme information.",
+          "number": "1800-180-1551"
+        },
+        {
+          "name": "National Consumer Helpline",
+          "description": "Complaints about goods, services & billing.",
+          "number": "1915"
+        },
+        {
+          "name": "Labour & Wages Helpline",
+          "description": "Wage disputes & workplace grievances.",
+          "number": "1800-11-2412"
+        },
+        {
+          "name": "Railway Enquiry",
+          "description": "Train schedules, PNR status & complaints.",
+          "number": "139"
+        }
+      ]
+    }
+  ]
+}

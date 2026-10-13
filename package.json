@@ -1,0 +1,26 @@
+{
+  "name": "nagrikdisha-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "db:setup": "node scripts/setup.js",
+    "db:seed": "node scripts/seed.js",
+    "test": "node --test",
+    "db:provision": "node scripts/provision.js",
+    "admin:create": "node scripts/create-admin.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "mysql2": "^3.14.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.0"
+  }
+}
