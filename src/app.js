@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { timingSafeEqual } from 'node:crypto';
+import { randomUUID, timingSafeEqual } from 'node:crypto';
 import { schemas } from './validation.js';
 import { cookieToken, loginSchema } from './auth.js';
 import { developmentOrigins } from './origins.js';
@@ -47,7 +47,7 @@ export function createApp({repository,adminKey,auth,adminList,secureCookies=fals
  app.get('/api/admin/content',async(req,res)=>res.json(await adminList()));
  for(const [type,schema] of Object.entries(schemas)) {
   app.post(`/api/admin/${type}`,async(req,res)=>{
-   const record=schema.parse(req.body);await repository.write(type,record);res.status(201).json({data:record});
+   const record=schema.parse({...req.body,id:req.body?.id ?? randomUUID()});await repository.write(type,record);res.status(201).json({data:record});
   });
   app.put(`/api/admin/${type}/:id`,async(req,res)=>{
    const record=schema.parse({...req.body,id:req.params.id});

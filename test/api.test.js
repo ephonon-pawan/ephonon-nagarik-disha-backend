@@ -3,6 +3,26 @@ import assert from 'node:assert/strict';
 import request from 'supertest';
 import {createApp} from '../src/app.js';
 const key='a'.repeat(40);
+test('creates generate unique IDs for all content types and edits preserve the route ID',async()=>{
+ const {app,calls}=setup();
+ const records={
+  groups:{name:'Students',description:'Education',icon:'book'},
+  sectors:{name:'Education',description:'Education help',icon:'book',color:'#286594',action:'Find help'},
+  resources:{sectorId:'education',name:'Scholarship',description:'Apply here',url:'https://example.gov.in'},
+  'helpline-sections':{title:'Support'},
+  helplines:{sectionId:'support',name:'Help',description:'Contact support',number:'112'},
+ };
+ const ids=new Set();
+ for(const [type,record] of Object.entries(records)){
+  const created=await request(app).post(`/api/admin/${type}`).auth(key,{type:'bearer'}).send(record);
+  assert.equal(created.status,201);
+  assert.match(created.body.data.id,/^[a-z0-9][a-z0-9-]{0,63}$/);
+  ids.add(created.body.data.id);
+  const updated=await request(app).put(`/api/admin/${type}/${created.body.data.id}`).auth(key,{type:'bearer'}).send(record);
+  assert.equal(updated.status,200);assert.equal(updated.body.data.id,created.body.data.id);
+ }
+ assert.equal(ids.size,5);assert.equal(calls.length,10);
+});
 function setup(overrides={}){const calls=[];const repository={ping:async()=>{},catalog:async()=>({groups:[],sectors:[],helplineSections:[],stats:{groups:0,sectors:0,resources:0}}),resources:async()=>[],write:async(...args)=>{calls.push(args);return true;},remove:async()=>true,...overrides};return {app:createApp({repository,adminKey:key}),calls};}
 test('public catalog and health work without admin authentication',async()=>{const {app}=setup();assert.equal((await request(app).get('/api/catalog')).status,200);assert.equal((await request(app).get('/api/health')).body.database,'connected');});
 test('writes reject unauthenticated callers without touching repository',async()=>{const {app,calls}=setup();assert.equal((await request(app).post('/api/admin/groups').send({})).status,401);assert.equal(calls.length,0);});
