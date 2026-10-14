@@ -53,6 +53,8 @@ The example URL is a placeholder, not a verified resource. After an authenticate
 
 Production: configure `FRONTEND_ORIGIN`, database credentials, host/port and a private admin key. Serve frontend and API over HTTPS, proxy `/api` to this service and configure frontend SPA route fallback. Stop processes cleanly before changing database configuration.
 
+`FRONTEND_ORIGIN` is a comma-separated list of exact browser origins, including the port and without trailing slashes. Local defaults allow localhost and 127.0.0.1 on ports 5173 and 5174. If login says "Origin is not allowed", add the browser's origin to this list and restart the backend. For Render, update the service's environment variable and redeploy, preserving any existing production origins. Cross-site login from localhost directly to Render cannot retain the SameSite=Lax session cookie; use the local backend through Vite's `/api` proxy for local admin development.
+
 ## Admin login and dashboard
 
 Run `npm run db:setup` to ensure the admins and sessions tables exist. Create your first admin locally (use your actual email):

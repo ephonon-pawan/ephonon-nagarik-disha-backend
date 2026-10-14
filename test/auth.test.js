@@ -1,7 +1,18 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import request from 'supertest';
 import {createApp} from '../src/app.js';import {hashPassword,verifyPassword} from '../src/auth.js';
 const session={id:1,email:'admin@example.com',csrfToken:'csrf-test'};
-function app(){return createApp({repository:{write:async()=>true},auth:{login:async(email,password)=>password==='correct'?{token:'a'.repeat(64),user:{id:1,email},csrfToken:'csrf-test'}:null,session:async(token)=>token==='a'.repeat(64)?session:null,logout:async()=>{}},adminList:async()=>({groups:[]})});}
+function app(overrides={}){return createApp({repository:{write:async()=>true},auth:{login:async(email,password)=>password==='correct'?{token:'a'.repeat(64),user:{id:1,email},csrfToken:'csrf-test'}:null,session:async(token)=>token==='a'.repeat(64)?session:null,logout:async()=>{}},adminList:async()=>({groups:[]}),...overrides});}
+test('local development login allows both Vite ports with credentialed CORS',async()=>{
+ for(const origin of ['http://localhost:5173','http://127.0.0.1:5173','http://localhost:5174','http://127.0.0.1:5174']){
+  const response=await request(app()).post('/api/auth/login').set('Origin',origin).send({email:'admin@example.com',password:'correct'});
+  assert.equal(response.status,200);assert.equal(response.headers['access-control-allow-origin'],origin);assert.equal(response.headers['access-control-allow-credentials'],'true');
+ }
+});
+test('explicit production origins replace local defaults',async()=>{
+ const api=request(app({origins:['https://nagrik.example']}));
+ assert.equal((await api.post('/api/auth/login').set('Origin','http://localhost:5174').send({email:'admin@example.com',password:'correct'})).status,403);
+ assert.equal((await api.post('/api/auth/login').set('Origin','https://nagrik.example').send({email:'admin@example.com',password:'correct'})).status,200);
+});
 test('password hash uses independent salts and validates password',async()=>{const first=await hashPassword('long-test-password');const second=await hashPassword('long-test-password');assert.notEqual(first,second);assert.equal(await verifyPassword('long-test-password',first),true);assert.equal(await verifyPassword('wrong',first),false);});
 test('browser login, cookie, me, CSRF enforcement and logout',async()=>{const agent=request.agent(app());const login=await agent.post('/api/auth/login').send({email:'admin@example.com',password:'correct'});assert.equal(login.status,200);assert.ok(login.headers['set-cookie'][0].includes('HttpOnly'));assert.ok(login.headers['set-cookie'][0].includes('SameSite=Lax'));assert.equal((await agent.get('/api/auth/me')).body.user.email,'admin@example.com');assert.equal((await agent.get('/api/admin/content')).status,200);const record={id:'test',name:'Test',description:'Test',icon:'book'};assert.equal((await agent.post('/api/admin/groups').send(record)).status,403);assert.equal((await agent.post('/api/admin/groups').set('x-csrf-token','csrf-test').send(record)).status,201);assert.equal((await agent.post('/api/auth/logout').set('x-csrf-token','csrf-test')).status,204);assert.equal((await agent.get('/api/auth/me')).status,401);});
 test('anonymous access and cross-origin login are denied',async()=>{const api=request(app());assert.equal((await api.get('/api/admin/content')).status,401);assert.equal((await api.post('/api/auth/login').set('Origin','https://unexpected.example').send({email:'admin@example.com',password:'correct'})).status,403);assert.equal((await api.post('/api/auth/login').send({email:'admin@example.com',password:'bad'})).status,401);});

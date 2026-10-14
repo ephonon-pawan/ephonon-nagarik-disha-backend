@@ -4,7 +4,8 @@ import helmet from 'helmet';
 import { timingSafeEqual } from 'node:crypto';
 import { schemas } from './validation.js';
 import { cookieToken, loginSchema } from './auth.js';
-export function createApp({repository,adminKey,auth,adminList,secureCookies=false,origins=['http://localhost:5173']}) {
+import { developmentOrigins } from './origins.js';
+export function createApp({repository,adminKey,auth,adminList,secureCookies=false,origins=developmentOrigins}) {
  const app=express(); app.disable('x-powered-by');app.use(helmet());app.use(cors({origin:origins,credentials:true}));app.use(express.json({limit:'100kb'}));
  app.get('/api/health',async(req,res)=>{try{await repository.ping();res.json({status:'ok',database:'connected'});}catch{res.status(503).json({error:'Database is unavailable.'});}});
  app.get('/api/catalog',async(req,res)=>res.json(await repository.catalog()));
