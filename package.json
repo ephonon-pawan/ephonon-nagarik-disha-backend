@@ -10,7 +10,8 @@
     "db:seed": "node scripts/seed.js",
     "test": "node --test",
     "db:provision": "node scripts/provision.js",
-    "admin:create": "node scripts/create-admin.js"
+    "admin:create": "node scripts/create-admin.js",
+    "admin:reset": "node scripts/reset-admin.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
